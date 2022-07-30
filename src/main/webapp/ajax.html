@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+
+<input type="text"  id="in01">
+
+ <input type="password" name="password">
+
+<input type="button" id="btn" value="提交">
+
+</body>
+
+<!--ajax : 请求异步数据-->
+
+<script type="application/ecmascript">
+    // var name = $("#in01").val();
+
+    $("#btn").click(function () {
+        var name = document.getElementById('in01').value;
+        console.log("name-->>"+name)
+        // $.ajax({
+        //         async: true,
+        //         type: "GET",
+        //         url: "/spring/user/admin01",
+        //         data: "name=" + name,
+        //         success: function (admin) {
+        //             alert("admin.name==" + admin.name);
+        //         }
+        //     });
+
+        $.get("/spring/user/admin01",{name : name},
+            function (data,status) {
+            console.log(data.name)
+
+            }
+        )
+
+    });
+
+
+</script>
+
+</html>

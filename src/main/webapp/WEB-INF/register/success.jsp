@@ -18,6 +18,6 @@
  <p> success! </p>
  用户：${username}
  车：${list} -- ${map}
-时间：${birthDay}
+ 时间：${birthDay}
 </body>
 </html>

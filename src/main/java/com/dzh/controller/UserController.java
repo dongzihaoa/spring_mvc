@@ -2,13 +2,15 @@ package com.dzh.controller;
 
 import com.dzh.entity.Admin;
 import com.dzh.entity.User;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 
-//@Controller
+@Controller
 //@RestController = @Controller +  @ResponseBody
 
 @RestController
@@ -34,6 +36,15 @@ public class UserController {
         modelAndView.setViewName("/login/login");
 
         return modelAndView;
+    }
+
+    @RequestMapping("admin01")
+    public Admin login01(String name){
+        System.out.println("login01");
+        System.out.println(name);
+        Admin admin = new Admin(1001, name, 123, new Date());
+        System.out.println(admin);
+        return admin;
     }
 
     @RequestMapping("register")
@@ -87,7 +98,7 @@ public class UserController {
     @ResponseBody()
     public Admin findAdminById01(@PathVariable("id") Integer id) {
 
-        return new Admin(id, "dzh", 123);
+        return new Admin(id, "dzh", 123,new Date());
 
     }
 
@@ -101,11 +112,11 @@ public class UserController {
 
         //模拟数据库查询
         ArrayList<Admin> admins = new ArrayList<>();
-        admins.add(new Admin(1001,"dzh",123));
-        admins.add(new Admin(1002,"lucky",456));
+        admins.add(new Admin(1001,"dzh",123,new Date()));
+        admins.add(new Admin(1002,"lucky",456,new Date()));
         
-        admins.add(new Admin(1003,"杰瑞",789));
-        admins.add(new Admin(1004,"汤姆",666));
+        admins.add(new Admin(1003,"杰瑞",789,new Date()));
+        admins.add(new Admin(1004,"汤姆",666,new Date()));
 
         return admins;
     }
