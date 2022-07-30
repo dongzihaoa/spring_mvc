@@ -15,9 +15,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class Admin {
 
-    @JsonProperty("编号")
+    //@JsonProperty("编号")
     private Integer id;
-    @JsonProperty("名字")
+    //@JsonProperty("名字")
     private String name;
 
     @JsonIgnore

@@ -2,18 +2,24 @@ package com.dzh.controller;
 
 import com.dzh.entity.Admin;
 import com.dzh.entity.User;
+import com.dzh.exception.UserExceptin;
+import com.dzh.handler.UserExceptionHandler;
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 @Controller
 //@RestController = @Controller +  @ResponseBody
 
-@RestController
 //@RequestMapping(path="user",params = "name",method = RequestMethod.GET)
 
 @RequestMapping("user")
@@ -39,7 +45,7 @@ public class UserController {
     }
 
     @RequestMapping("admin01")
-    public Admin login01(String name){
+    public Admin login01(@RequestBody String name){
         System.out.println("login01");
         System.out.println(name);
         Admin admin = new Admin(1001, name, 123, new Date());
@@ -119,6 +125,37 @@ public class UserController {
         admins.add(new Admin(1004,"汤姆",666,new Date()));
 
         return admins;
+    }
+
+    @RequestMapping("upload")
+    @ResponseBody
+    public String upload(MultipartFile file) {
+
+        String uploadPath = "/Users/lucky/Downloads/file/";
+
+        String filename = file.getOriginalFilename();
+        System.out.println(filename);
+
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+
+        String newName = uuid + filename;
+
+
+        File files = new File(uploadPath, newName);
+
+        try {
+            file.transferTo(files);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return "success";
+    }
+
+    @RequestMapping("textException")
+
+    public void textException() throws UserExceptin {
+        int i = 1 / 0;
     }
 
 }
